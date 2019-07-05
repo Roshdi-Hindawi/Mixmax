@@ -1,0 +1,49 @@
+admin_worker_index:
+    path:     /
+    defaults: { _controller: "MainBundle:Worker:index" }
+    methods:  GET
+
+admin_worker_show:
+    path:     /{id}/show
+    defaults: { _controller: "MainBundle:Worker:show" }
+    methods:  [GET, POST]
+
+admin_worker_new:
+    path:     /new
+    defaults: { _controller: "MainBundle:Worker:new" }
+    methods:  [GET, POST]
+
+admin_worker_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "MainBundle:Worker:edit" }
+    methods:  [GET, POST]
+
+admin_worker_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "MainBundle:Worker:delete" }
+    methods:  DELETE
+
+admin_worker_manage:
+    path:     /{id}/avance
+    defaults: { _controller: "MainBundle:Worker:avance" }
+    methods:  [GET, POST]
+
+admin_worker_restDays:
+    path:     /{id}/rest-days
+    defaults: { _controller: "MainBundle:Worker:restDays" }
+    methods:  [GET, POST]
+
+admin_worker_pay:
+    path:     /{id}/pay
+    defaults: { _controller: "MainBundle:Worker:pay" }
+    methods:  [GET, POST]
+
+admin_worker_print:
+    path:     /{id}/print
+    defaults: { _controller: "MainBundle:Worker:print" }
+    methods:  [GET, POST]
+
+admin_facility_worker:
+    path:     /facility/{id}/workers
+    defaults: { _controller: "MainBundle:Worker:facilityWorker" }
+    methods:  GET

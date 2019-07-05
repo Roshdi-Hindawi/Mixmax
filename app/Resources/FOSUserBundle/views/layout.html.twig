@@ -1,0 +1,634 @@
+﻿<!DOCTYPE html>
+<html  class="fixed">
+    <head>
+        <!-- Basic -->
+		<meta charset="UTF-8">
+
+        <!-- pages titles -->
+		<title>{% block title %}Dashboard | Mixmax{% endblock %}</title>
+
+        <meta name="keywords" content="mixmax food" />
+		<meta name="description" content="mixmax food tandouri sandwish libanais makloub chawarma escalope">
+		<meta name="author" content="mixmax food">
+
+		<!-- Mobile Metas -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+		<!-- Web Fonts  -->
+		<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css">
+
+		<!-- Vendor CSS -->
+		<link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap/css/bootstrap.css') }}" />
+		<link rel="stylesheet" href="{{ asset('assets/vendor/font-awesome/css/font-awesome.css') }}" />
+		<link rel="stylesheet" href="{{ asset('assets/vendor/magnific-popup/magnific-popup.css') }}" />
+		<link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap-datepicker/css/datepicker3.css') }}" />
+
+		<!-- Specific Page Vendor CSS -->
+		<link rel="stylesheet" href="{{ asset('assets/vendor/jquery-ui/css/ui-lightness/jquery-ui-1.10.4.custom.css') }}" />
+		<link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap-multiselect/bootstrap-multiselect.css') }}" />
+		<link rel="stylesheet" href="{{ asset('assets/vendor/morris/morris.css') }}" />
+        <link rel="stylesheet" href="{{ asset('assets/vendor/owl-carousel/owl.carousel.css') }}" />
+		<link rel="stylesheet" href="{{ asset('assets/vendor/owl-carousel/owl.theme.css') }}" />
+        <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap-fileupload/bootstrap-fileupload.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap/css/bootstrap.css') }}" />
+		<link rel="stylesheet" href="{{ asset('assets/vendor/font-awesome/css/font-awesome.css') }}" />
+		<link rel="stylesheet" href="{{ asset('assets/vendor/magnific-popup/magnific-popup.css') }}" />
+		<link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap-datepicker/css/datepicker3.css') }}" />
+		<link rel="stylesheet" href="{{ asset('assets/vendor/fullcalendar/fullcalendar.css') }}" />
+		<link rel="stylesheet" href="{{ asset('assets/vendor/fullcalendar/fullcalendar.print.css') }}" media="print" />
+        <link rel="stylesheet" href="{{ asset('assets/vendor/pnotify/pnotify.custom.css') }}" />
+
+		<!-- Theme CSS -->
+		<link rel="stylesheet" href="{{ asset('assets/stylesheets/theme.css') }}" />
+
+		<!-- Skin CSS -->
+		<link rel="stylesheet" href="{{ asset('assets/stylesheets/skins/default.css') }}" />
+
+		<!-- Theme Custom CSS -->
+		<link rel="stylesheet" href="{{ asset('assets/stylesheets/theme-custom.css') }}">
+
+		<!-- Head Libs -->
+		<script src="{{ asset('assets/vendor/modernizr/modernizr.js') }}"></script>
+
+        <!-- pages style -->
+        {% block StyleSheet %}{% endblock %}
+    </head>
+    <body>
+
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="ui-pnotify " style="width: 300px; display: block; opacity: 1; right: 15px; top: 50px; cursor: auto;">
+                    <div class="notification ui-pnotify-container notification-{{ label }}" style="min-height: 16px;">
+                        <div class="ui-pnotify-closer" style="cursor: pointer; visibility: hidden;">
+                            <span class="fa fa-times" title="Close"></span>
+                        </div>
+                        <div class="ui-pnotify-sticker" style="cursor: pointer; visibility: hidden;">
+                            <span class="fa fa-pause" title="Stick"></span>
+                        </div>
+                        <div class="ui-pnotify-icon">
+                            <span class="fa fa-{% if label == 'success' %}check{% else %}exclamation{% endif %}"></span>
+                        </div>
+                        <h4 class="ui-pnotify-title">Notice</h4>
+                        <div class="ui-pnotify-text">{{ message }}.</div>
+                        <div style="margin-top: 5px; clear: both; text-align: right; display: block;"></div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endfor %}
+
+        <section class="body">
+
+            <!-- start: header -->
+			<header class="header">
+				<div class="logo-container">
+					<a href="../" class="logo">
+						<img src="{{ asset('assets/images/logo.png') }}"  height="70" alt="mixmax fast food sandwich tacos libanais chawarma escalope kebab" />
+					</a>
+					<div class="visible-xs toggle-sidebar-left" data-toggle-class="sidebar-left-opened" data-target="html" data-fire-event="sidebar-left-opened">
+						<i class="fa fa-bars" aria-label="Toggle sidebar"></i>
+					</div>
+				</div>
+			
+				<!-- start: search & user box -->
+				<div class="header-right">
+			
+					<form action="Javascript:void(0)" class="search nav-form">
+						<div class="input-group input-search">
+							<input type="text" class="form-control" name="q" id="q" placeholder="Search...">
+							<span class="input-group-btn">
+								<button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+							</span>
+						</div>
+					</form>
+			
+					<span class="separator"></span>
+			
+					<ul class="notifications">
+						<li>
+							<a href="#" class="dropdown-toggle notification-icon" data-toggle="dropdown">
+								<i class="fa fa-tasks"></i>
+								<span class="badge">3</span>
+							</a>
+			
+							<div class="dropdown-menu notification-menu large">
+								<div class="notification-title">
+									<span class="pull-right label label-default">3</span>
+									Tasks
+								</div>
+			
+								<div class="content">
+									<ul>
+										<li>
+											<p class="clearfix mb-xs">
+												<span class="message pull-left">Generating Sales Report</span>
+												<span class="message pull-right text-dark">60%</span>
+											</p>
+											<div class="progress progress-xs light">
+												<div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
+											</div>
+										</li>
+			
+										<li>
+											<p class="clearfix mb-xs">
+												<span class="message pull-left">Importing Contacts</span>
+												<span class="message pull-right text-dark">98%</span>
+											</p>
+											<div class="progress progress-xs light">
+												<div class="progress-bar" role="progressbar" aria-valuenow="98" aria-valuemin="0" aria-valuemax="100" style="width: 98%;"></div>
+											</div>
+										</li>
+			
+										<li>
+											<p class="clearfix mb-xs">
+												<span class="message pull-left">Uploading something big</span>
+												<span class="message pull-right text-dark">33%</span>
+											</p>
+											<div class="progress progress-xs light mb-xs">
+												<div class="progress-bar" role="progressbar" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100" style="width: 33%;"></div>
+											</div>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</li>
+						<li>
+							<a href="#" class="dropdown-toggle notification-icon" data-toggle="dropdown">
+								<i class="fa fa-envelope"></i>
+								<span class="badge">4</span>
+							</a>
+			
+							<div class="dropdown-menu notification-menu">
+								<div class="notification-title">
+									<span class="pull-right label label-default">230</span>
+									Messages
+								</div>
+			
+								<div class="content">
+									<ul>
+										<li>
+											<a href="#" class="clearfix">
+												<figure class="image">
+													<img src="{{ asset('assets/images/!sample-user.jpg') }}" alt="Joseph Doe Junior" class="img-circle" />
+												</figure>
+												<span class="title">Joseph Doe</span>
+												<span class="message">Lorem ipsum dolor sit.</span>
+											</a>
+										</li>
+										<li>
+											<a href="#" class="clearfix">
+												<figure class="image">
+													<img src="{{ asset('assets/images/!sample-user.jpg') }}" alt="Joseph Junior" class="img-circle" />
+												</figure>
+												<span class="title">Joseph Junior</span>
+												<span class="message truncate">Truncated message. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sit amet lacinia orci. Proin vestibulum eget risus non luctus. Nunc cursus lacinia lacinia. Nulla molestie malesuada est ac tincidunt. Quisque eget convallis diam, nec venenatis risus. Vestibulum blandit faucibus est et malesuada. Sed interdum cursus dui nec venenatis. Pellentesque non nisi lobortis, rutrum eros ut, convallis nisi. Sed tellus turpis, dignissim sit amet tristique quis, pretium id est. Sed aliquam diam diam, sit amet faucibus tellus ultricies eu. Aliquam lacinia nibh a metus bibendum, eu commodo eros commodo. Sed commodo molestie elit, a molestie lacus porttitor id. Donec facilisis varius sapien, ac fringilla velit porttitor et. Nam tincidunt gravida dui, sed pharetra odio pharetra nec. Duis consectetur venenatis pharetra. Vestibulum egestas nisi quis elementum elementum.</span>
+											</a>
+										</li>
+										<li>
+											<a href="#" class="clearfix">
+												<figure class="image">
+													<img src="{{ asset('assets/images/!sample-user.jpg') }}" alt="Joe Junior" class="img-circle" />
+												</figure>
+												<span class="title">Joe Junior</span>
+												<span class="message">Lorem ipsum dolor sit.</span>
+											</a>
+										</li>
+										<li>
+											<a href="#" class="clearfix">
+												<figure class="image">
+													<img src="{{ asset('assets/images/!sample-user.jpg') }}" alt="Joseph Junior" class="img-circle" />
+												</figure>
+												<span class="title">Joseph Junior</span>
+												<span class="message">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sit amet lacinia orci. Proin vestibulum eget risus non luctus. Nunc cursus lacinia lacinia. Nulla molestie malesuada est ac tincidunt. Quisque eget convallis diam.</span>
+											</a>
+										</li>
+									</ul>
+			
+									<hr />
+			
+									<div class="text-right">
+										<a href="#" class="view-more">View All</a>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li>
+							<a href="#" class="dropdown-toggle notification-icon" data-toggle="dropdown">
+								<i class="fa fa-bell"></i>
+								<span class="badge">3</span>
+							</a>
+			
+							<div class="dropdown-menu notification-menu">
+								<div class="notification-title">
+									<span class="pull-right label label-default">3</span>
+									Alerts
+								</div>
+			
+								<div class="content">
+									<ul>
+										<li>
+											<a href="#" class="clearfix">
+												<div class="image">
+													<i class="fa fa-thumbs-down bg-danger"></i>
+												</div>
+												<span class="title">Server is Down!</span>
+												<span class="message">Just now</span>
+											</a>
+										</li>
+										<li>
+											<a href="#" class="clearfix">
+												<div class="image">
+													<i class="fa fa-lock bg-warning"></i>
+												</div>
+												<span class="title">User Locked</span>
+												<span class="message">15 minutes ago</span>
+											</a>
+										</li>
+										<li>
+											<a href="#" class="clearfix">
+												<div class="image">
+													<i class="fa fa-signal bg-success"></i>
+												</div>
+												<span class="title">Connection Restaured</span>
+												<span class="message">10/10/2014</span>
+											</a>
+										</li>
+									</ul>
+			
+									<hr />
+			
+									<div class="text-right">
+										<a href="#" class="view-more">View All</a>
+									</div>
+								</div>
+							</div>
+						</li>
+					</ul>
+			
+					<span class="separator"></span>
+			
+					<div id="userbox" class="userbox">
+						<a href="#" data-toggle="dropdown">
+							<figure class="profile-picture">
+								<img src="{{ asset('assets/images/!logged-user.jpg') }}" alt="" class="img-circle" data-lock-picture="{{ asset('assets/images/!logged-user.jpg') }}" />
+							</figure>
+							<div class="profile-info" data-lock-name="{{ app.user.username }}" data-lock-email="{{ app.user.email }}">
+								<span class="name">{{ app.user.username }}</span>
+								<span class="role">administrator</span>
+							</div>
+			
+							<i class="fa custom-caret"></i>
+						</a>
+			
+						<div class="dropdown-menu">
+							<ul class="list-unstyled">
+								<li class="divider"></li>
+								<li>
+									<a role="menuitem" tabindex="-1" href="{{ path('fos_user_profile_show') }}"><i class="fa fa-user"></i> Mon Profile</a>
+								</li>
+                                <li>
+									<a role="menuitem" tabindex="-1" href="{{ path('fos_user_profile_edit') }}"><i class="fa fa-edit"></i> Modifier Profile</a>
+								</li>
+                                <li>
+									<a role="menuitem" tabindex="-1" href="{{ path('fos_user_change_password') }}"><i class="fa fa-unlock"></i> Changer MDP</a>
+								</li>
+								<li>
+									<a role="menuitem" tabindex="-1" href="#" data-lock-screen="true"><i class="fa fa-lock"></i> Blocker Ecran</a>
+								</li>
+								<li>
+									<a role="menuitem" tabindex="-1" href="{{ path('fos_user_security_logout') }}"><i class="fa fa-power-off"></i> Deconnecter</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<!-- end: search & user box -->
+			</header>
+			<!-- end: header -->
+
+            <div class="inner-wrapper">
+                <!-- start: sidebar -->
+				<aside id="sidebar-left" class="sidebar-left">
+				
+					<div class="sidebar-header">
+						<div class="sidebar-title">
+							<!--Navigation-->
+						</div>
+						<div class="sidebar-toggle hidden-xs" data-toggle-class="sidebar-left-collapsed" data-target="html" data-fire-event="sidebar-left-toggle">
+							<i class="fa fa-bars" aria-label="Toggle sidebar"></i>
+						</div>
+					</div>
+				
+					<div class="nano">
+						<div class="nano-content">
+							<nav id="menu" class="nav-main" role="navigation">
+								<ul class="nav nav-main">
+									<li class="nav-active">
+										<a href="./">
+											<i class="fa fa-home" aria-hidden="true"></i>
+											<span>Dashboard</span>
+										</a>
+									</li>
+									
+									<li class="nav-parent {% block rest %}{% endblock %}">
+										<a>
+											<i class="fa fa-building" aria-hidden="true"></i>
+											<span>Restaurants</span>
+										</a>
+										<ul class="nav nav-children">
+											<li {% block restlist %}{% endblock %}>
+												<a href="{{ path('admin_facility_index') }}">
+													 Liste des Restaurants
+												</a>
+											</li>
+											<li {% block restadd %}{% endblock %}>
+												<a href="{{ path('admin_facility_new') }}">
+													 Ajouter Restaurant
+												</a>
+											</li>
+											
+										</ul>
+									</li>
+									<li class="nav-parent {% block worker %}{% endblock %}">
+										<a>
+											<i class="fa fa-users" aria-hidden="true"></i>
+											<span>Employes</span>
+										</a>
+										<ul class="nav nav-children">
+											<li {% block workerlist %}{% endblock %}>
+												<a href="{{ path('admin_worker_index') }}">
+													 Liste des employes
+												</a>
+											</li>
+											<li {% block workeradd %}{% endblock %}>
+												<a href="{{ path('admin_worker_new') }}">
+													 Ajouter Employe
+												</a>
+											</li>
+											
+										</ul>
+									</li>
+									<li class="nav-parent {% block month %}{% endblock %}">
+										<a>
+											<i class="fa fa-calendar" aria-hidden="true"></i>
+											<span>Mois</span>
+										</a>
+										<ul class="nav nav-children">
+											<li {% block monthadd %}{% endblock %}>
+												{{ render(controller('MainBundle:Default:month')) }}
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</nav>
+				
+							<hr class="separator" />
+				
+							<div class="sidebar-widget widget-tasks">
+								<div class="widget-header">
+									<h6>Utilites</h6>
+									<div class="widget-toggle">+</div>
+								</div>
+								<div class="widget-content">
+									<ul class="list-unstyled m-none">
+										<li><a href="#">{{ render(controller('MainBundle:Facility:total')) }} Dt</a></li>
+									</ul>
+								</div>
+							</div>
+				
+							<hr class="separator" />
+				
+							<div class="sidebar-widget widget-stats">
+								<div class="widget-header">
+									<h6>Company Stats</h6>
+									<div class="widget-toggle">+</div>
+								</div>
+								<div class="widget-content">
+									<ul>
+										<li>
+											<span class="stats-title">Stat 1</span>
+											<span class="stats-complete">85%</span>
+											<div class="progress">
+												<div class="progress-bar progress-bar-primary progress-without-number" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 85%;">
+													<span class="sr-only">85% Complete</span>
+												</div>
+											</div>
+										</li>
+										<li>
+											<span class="stats-title">Stat 2</span>
+											<span class="stats-complete">70%</span>
+											<div class="progress">
+												<div class="progress-bar progress-bar-primary progress-without-number" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%;">
+													<span class="sr-only">70% Complete</span>
+												</div>
+											</div>
+										</li>
+										<li>
+											<span class="stats-title">Stat 3</span>
+											<span class="stats-complete">2%</span>
+											<div class="progress">
+												<div class="progress-bar progress-bar-primary progress-without-number" role="progressbar" aria-valuenow="2" aria-valuemin="0" aria-valuemax="100" style="width: 2%;">
+													<span class="sr-only">2% Complete</span>
+												</div>
+											</div>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+				
+					</div>
+				
+				</aside>
+				<!-- end: sidebar -->
+
+                <section role="main" class="content-body">
+					<header class="page-header">
+						<h2>Dashboard</h2>
+					
+						<div class="right-wrapper pull-right">
+							<ol class="breadcrumbs">
+								<li>
+									<a href="/">
+										<i class="fa fa-home"></i>
+									</a>
+								</li>
+								<li><span>Dashboard</span></li>
+							</ol>
+					
+							<a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
+						</div>
+					</header>
+                    {% if app.request.hasPreviousSession %}
+                            {% for type, messages in app.session.flashbag.all() %}
+                                {% for message in messages %}
+                                    <div class="flash-{{ type }}">
+                                        {{ message }}
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+                        {% endif %}
+
+                        <div>								
+                            {% block fos_user_content %}
+                            {% endblock fos_user_content %}
+                        </div>
+                    {% block body %}{% endblock %}
+                </section>
+            </div>
+
+			<aside id="sidebar-right" class="sidebar-right">
+				<div class="nano">
+					<div class="nano-content">
+						<a href="#" class="mobile-close visible-xs">
+							Collapse <i class="fa fa-chevron-right"></i>
+						</a>
+			
+						<div class="sidebar-right-wrapper">
+			
+							<div class="sidebar-widget widget-calendar">
+								<h6>Upcoming Tasks</h6>
+								<div data-plugin-datepicker data-plugin-skin="dark" ></div>
+			
+								<ul>
+									<li>
+										<time datetime="2014-04-19T00:00+00:00">04/19/2014</time>
+										<span>Company Meeting</span>
+									</li>
+								</ul>
+							</div>
+			
+							<div class="sidebar-widget widget-friends">
+								<h6>Friends</h6>
+								<ul>
+									<li class="status-online">
+										<figure class="profile-picture">
+											<img src="{{ asset('assets/images/!sample-user.jpg') }}" alt="Joseph Doe" class="img-circle">
+										</figure>
+										<div class="profile-info">
+											<span class="name">Joseph Doe Junior</span>
+											<span class="title">Hey, how are you?</span>
+										</div>
+									</li>
+									<li class="status-online">
+										<figure class="profile-picture">
+											<img src="{{ asset('assets/images/!sample-user.jpg') }}" alt="Joseph Doe" class="img-circle">
+										</figure>
+										<div class="profile-info">
+											<span class="name">Joseph Doe Junior</span>
+											<span class="title">Hey, how are you?</span>
+										</div>
+									</li>
+									<li class="status-offline">
+										<figure class="profile-picture">
+											<img src="{{ asset('assets/images/!sample-user.jpg') }}" alt="Joseph Doe" class="img-circle">
+										</figure>
+										<div class="profile-info">
+											<span class="name">Joseph Doe Junior</span>
+											<span class="title">Hey, how are you?</span>
+										</div>
+									</li>
+									<li class="status-offline">
+										<figure class="profile-picture">
+											<img src="{{ asset('assets/images/!sample-user.jpg') }}" alt="Joseph Doe" class="img-circle">
+										</figure>
+										<div class="profile-info">
+											<span class="name">Joseph Doe Junior</span>
+											<span class="title">Hey, how are you?</span>
+										</div>
+									</li>
+								</ul>
+							</div>
+			
+						</div>
+					</div>
+				</div>
+			</aside>
+		</section>
+
+		<!-- Vendor -->
+		<script src="{{ asset('assets/vendor/jquery/jquery.js') }}"></script>
+		<script src="{{ asset('assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js') }}"></script>
+		<script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.js') }}"></script>
+		<script src="{{ asset('assets/vendor/nanoscroller/nanoscroller.js') }}"></script>
+		<script src="{{ asset('assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
+		<script src="{{ asset('assets/vendor/magnific-popup/magnific-popup.js') }}"></script>
+		<script src="{{ asset('assets/vendor/jquery-placeholder/jquery.placeholder.js') }}"></script>
+		
+		<!-- Specific Page Vendor -->
+		<script src="{{ asset('assets/vendor/jquery-ui/js/jquery-ui-1.10.4.custom.js') }}"></script>
+		<script src="{{ asset('assets/vendor/jquery-ui-touch-punch/jquery.ui.touch-punch.js') }}"></script>
+		<script src="{{ asset('assets/vendor/jquery-appear/jquery.appear.js') }}"></script>
+		<script src="{{ asset('assets/vendor/bootstrap-multiselect/bootstrap-multiselect.js') }}"></script>
+		<script src="{{ asset('assets/vendor/jquery-easypiechart/jquery.easypiechart.js') }}"></script>
+		<script src="{{ asset('assets/vendor/flot/jquery.flot.js') }}"></script>
+		<script src="{{ asset('assets/vendor/flot-tooltip/jquery.flot.tooltip.js') }}"></script>
+		<script src="{{ asset('assets/vendor/flot/jquery.flot.pie.js') }}"></script>
+		<script src="{{ asset('assets/vendor/flot/jquery.flot.categories.js') }}"></script>
+		<script src="{{ asset('assets/vendor/flot/jquery.flot.resize.js') }}"></script>
+		<script src="{{ asset('assets/vendor/jquery-sparkline/jquery.sparkline.js') }}"></script>
+		<script src="{{ asset('assets/vendor/raphael/raphael.js') }}"></script>
+		<script src="{{ asset('assets/vendor/morris/morris.js') }}"></script>
+		<script src="{{ asset('assets/vendor/gauge/gauge.js') }}"></script>
+		<script src="{{ asset('assets/vendor/snap-svg/snap.svg.js') }}"></script>
+		<script src="{{ asset('assets/vendor/liquid-meter/liquid.meter.js') }}"></script>
+		<script src="{{ asset('assets/vendor/jqvmap/jquery.vmap.js') }}"></script>
+		<script src="{{ asset('assets/vendor/jqvmap/data/jquery.vmap.sampledata.js') }}"></script>
+		<script src="{{ asset('assets/vendor/jqvmap/maps/jquery.vmap.world.js') }}"></script>
+		<script src="{{ asset('assets/vendor/jqvmap/maps/continents/jquery.vmap.africa.js') }}"></script>
+		<script src="{{ asset('assets/vendor/jqvmap/maps/continents/jquery.vmap.asia.js') }}"></script>
+		<script src="{{ asset('assets/vendor/jqvmap/maps/continents/jquery.vmap.australia.js') }}"></script>
+		<script src="{{ asset('assets/vendor/jqvmap/maps/continents/jquery.vmap.europe.js') }}"></script>
+		<script src="{{ asset('assets/vendor/jqvmap/maps/continents/jquery.vmap.north-america.js') }}"></script>
+		<script src="{{ asset('assets/vendor/jqvmap/maps/continents/jquery.vmap.south-america.js') }}"></script>
+        <script src="{{ asset('assets/vendor/owl-carousel/owl.carousel.js') }}"></script>
+        <script src="{{ asset('assets/vendor/jquery-autosize/jquery.autosize.js') }}"></script>
+		<script src="{{ asset('assets/vendor/bootstrap-fileupload/bootstrap-fileupload.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/jquery-validation/jquery.validate.js') }}"></script>
+        <script src="{{ asset('assets/vendor/jquery-ui/js/jquery-ui-1.10.4.custom.js') }}"></script>
+		<script src="{{ asset('assets/vendor/jquery-ui-touch-punch/jquery.ui.touch-punch.js') }}"></script>
+		<script src="{{ asset('assets/vendor/select2/select2.js') }}"></script>
+		<script src="{{ asset('assets/vendor/bootstrap-multiselect/bootstrap-multiselect.js') }}"></script>
+		<script src="{{ asset('assets/vendor/jquery-maskedinput/jquery.maskedinput.js') }}"></script>
+		<script src="{{ asset('assets/vendor/bootstrap-tagsinput/bootstrap-tagsinput.js') }}"></script>
+		<script src="{{ asset('assets/vendor/bootstrap-colorpicker/js/bootstrap-colorpicker.js') }}"></script>
+		<script src="{{ asset('assets/vendor/bootstrap-timepicker/js/bootstrap-timepicker.js') }}"></script>
+		<script src="{{ asset('assets/vendor/fuelux/js/spinner.js') }}"></script>
+		<script src="{{ asset('assets/vendor/dropzone/dropzone.js') }}"></script>
+		<script src="{{ asset('assets/vendor/bootstrap-markdown/js/markdown.js') }}"></script>
+		<script src="{{ asset('assets/vendor/bootstrap-markdown/js/to-markdown.js') }}"></script>
+		<script src="{{ asset('assets/vendor/bootstrap-markdown/js/bootstrap-markdown.js') }}"></script>
+		<script src="{{ asset('assets/vendor/codemirror/lib/codemirror.js') }}"></script>
+		<script src="{{ asset('assets/vendor/codemirror/addon/selection/active-line.js') }}"></script>
+		<script src="{{ asset('assets/vendor/codemirror/addon/edit/matchbrackets.js') }}"></script>
+		<script src="{{ asset('assets/vendor/codemirror/mode/javascript/javascript.js') }}"></script>
+		<script src="{{ asset('assets/vendor/codemirror/mode/xml/xml.js') }}"></script>
+		<script src="{{ asset('assets/vendor/codemirror/mode/htmlmixed/htmlmixed.js') }}"></script>
+		<script src="{{ asset('assets/vendor/codemirror/mode/css/css.js') }}"></script>
+		<script src="{{ asset('assets/vendor/summernote/summernote.js') }}"></script>
+		<script src="{{ asset('assets/vendor/bootstrap-maxlength/bootstrap-maxlength.js') }}"></script>
+		<script src="{{ asset('assets/vendor/ios7-switch/ios7-switch.js') }}"></script>
+		<script src="{{ asset('assets/vendor/fullcalendar/lib/moment.min.js') }}"></script>
+		<script src="{{ asset('assets/vendor/fullcalendar/fullcalendar.js') }}"></script>
+        <script src="{{ asset('assets/vendor/pnotify/pnotify.custom.js') }}"></script>
+
+        <!-- pages script -->
+        {% block JavaScript %}{% endblock %}
+		
+		<!-- Theme Base, Components and Settings -->
+		<script src="{{ asset('assets/javascripts/theme.js') }}"></script>
+		
+		<!-- Theme Custom -->
+		<script src="{{ asset('assets/javascripts/theme.custom.js') }}"></script>
+		
+		<!-- Theme Initialization Files -->
+		<script src="{{ asset('assets/javascripts/theme.init.js') }}"></script>
+
+
+		<!-- Examples -->
+		<script src="{{ asset('assets/javascripts/dashboard/examples.dashboard.js') }}"></script>
+        <script src="{{ asset('assets/javascripts/forms/examples.validation.js') }}"></script>
+        <script src="{{ asset('assets/javascripts/forms/examples.advanced.form.js') }}"></script>
+        <script src="{{ asset('assets/javascripts/ui-elements/examples.notifications.js') }}"></script>
+  
+    </body>
+</html>

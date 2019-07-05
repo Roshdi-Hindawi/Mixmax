@@ -1,0 +1,7 @@
+main_homepage:
+    path:     /
+    defaults: { _controller: MainBundle:Default:index }
+
+homepage:
+    path:     /home
+    defaults: { _controller: MainBundle:Default:home }
