@@ -1,0 +1,24 @@
+admin_facility_index:
+    path:     /
+    defaults: { _controller: "MainBundle:Facility:index" }
+    methods:  GET
+
+admin_facility_show:
+    path:     /{id}/show
+    defaults: { _controller: "MainBundle:Facility:show" }
+    methods:  [GET, POST]
+
+admin_facility_new:
+    path:     /new
+    defaults: { _controller: "MainBundle:Facility:new" }
+    methods:  [GET, POST]
+
+admin_facility_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "MainBundle:Facility:edit" }
+    methods:  [GET, POST]
+
+admin_facility_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "MainBundle:Facility:delete" }
+    methods:  DELETE

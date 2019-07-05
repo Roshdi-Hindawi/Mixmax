@@ -1,0 +1,100 @@
+{% extends '@FOSUser/layout.html.twig' %}
+
+{% block worker %}nav-expanded nav-active{% endblock %}
+
+{% block workerlist %}class="nav-active"{% endblock %}
+
+{% block body %}
+
+<!-- start: page -->
+
+<div class="row">{% set fix = 0 %}
+    {% for worker in workers %}
+        {% set fix = fix+1 %}
+        <div class="col-md-12 col-lg-6">
+            <div class="row">
+			    <div class="col-md-12">
+				    <section class="panel-group mb-xlg">
+					    <div class="widget-twitter-profile">
+						    <div class="top-image">
+							    <img src="" alt="">
+						    </div>
+						    <div class="profile-info">
+							    <div class="profile-picture">
+								    {% if worker.image %}
+					                    <img src="{{ asset(worker.image.imgPath) }}" class="rounded img-responsive" alt="mixmax">
+                                    {% elseif worker.gender == 'male' %}
+                                        <img src="{{ asset('assets/images/male.png') }}" class="rounded img-responsive" alt="mixmax">
+                                    {% else %}
+                                        <img src="{{ asset('assets/images/male.png') }}" class="rounded img-responsive" alt="mixmax">
+                                    {% endif %}
+							    </div><br />
+							    <div class="profile-account">
+								    <h3 class="name text-semibold">{{ worker.name }}</h3>
+								    <a href="{{ path('admin_worker_show', { 'id': worker.id }) }}" class="account">@{{ worker.status }}</a>
+							    </div><br />
+							    <ul class="profile-stats">
+								    <li>
+									    <h5 class="stat text-uppercase">Jours</h5>
+									    <h4 class="count">{{ workdays[worker.id] }}</h4>
+								    </li>
+								    <li>
+									    <h5 class="stat text-uppercase">Avance</h5>
+									    <h4 class="count">{{ advance[worker.id] }}DT</h4>
+								    </li>
+								    <li>
+									    <h5 class="stat text-uppercase">Salaire</h5>
+									    <h4 class="count">{{ ((worker.salary / 26) * workdays[worker.id] - advance[worker.id])|round }}DT</h4>
+								    </li>
+							    </ul>
+						    </div>
+						    <div class="profile-quote">
+							    <div class"row">
+								    <div class"col-md-6">
+									    <p>Restaurant: {{ worker.facility.name }}</p>
+									    <p>Telephone : {{ worker.phone }}</p>
+									    <p>Salaire   : {{ worker.Salary }}</p>
+									    <p>{% if worker.birthdate %}Date Naissance: {{ worker.birthdate|date('d-M-Y') }}{% endif %}</p>
+								    </div>
+								    <div class"col-md-3">
+								    </div>
+							    </div>
+							    <div class="quote-footer">
+								    <span class="datetime">
+									    {% if worker.startDate %}Date Debut:
+										    {{ worker.startDate|date('d M Y') }}
+									    {% endif %}
+								    </span>
+								    -
+								    <a href="{{ path('admin_worker_show', { 'id': worker.id }) }}">Details</a>
+							    </div>
+						    </div>
+					    </div>
+					    <div class="panel-footer panel-footer-btn-group">
+						    <a href="{{ path('admin_worker_show', { 'id': worker.id }) }}"><i class="fa fa-user mr-xs"></i> Profile</a>
+						    <a href="{{ path('admin_worker_edit', { 'id': worker.id }) }}"><i class="fa fa-cogs mr-xs"></i> Modifier</a>
+                            {% if salary.paid[worker.id] is defined %}
+						        <a href="{{ path('admin_worker_pay', { 'id': worker.id }) }}"><i class="fa fa-usd mr-xs"></i> Salaire
+							        {% if salary.paid[worker.id] is defined and salary.paid[worker.id]==1 %}
+								        <div class="ib float-left">
+									        <img src="{{ asset('assets/images/paid.png') }}" alt="mixmax" height="30"/>
+								        </div>
+							        {% endif %}
+                                </a>
+                            {% else %}
+                            <a href="javascript:void(0)" style="color:dimgrey;"> <i class="fa fa-usd mr-xs"></i> N'a pas encore un Salaire</a>
+                            {% endif %}
+					    </div>
+				    </section>
+			    </div>
+            </div>
+        </div>
+        {% if fix == 2 %}
+        {% set fix = 0 %}
+            <div class="clearfix"></div>
+        {% endif %}
+    {% endfor %}
+</div>
+<!-- end: page -->
+
+{% endblock %}

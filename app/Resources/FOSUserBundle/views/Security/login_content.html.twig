@@ -1,0 +1,66 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% if error %}
+    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+{% endif %}
+
+<form action="{{ path("fos_user_security_check") }}" method="post">
+
+    {% if csrf_token %}
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+    {% endif %}
+
+    <div class="form-group mb-lg">
+        <label for="username">{{ 'security.login.username'|trans }}</label>
+        <div class="input-group input-group-icon">
+            <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" autocomplete="username" class="form-control input-lg" />
+            <span class="input-group-addon">
+                <span class="icon icon-lg">
+                    <i class="fa fa-user"></i>
+                </span>
+            </span>
+        </div>
+    </div>
+
+    <div class="form-group mb-lg">
+        <div class="clearfix">
+            <label class="pull-left" for="password">{{ 'security.login.password'|trans }}</label>
+        </div>
+        <div class="input-group input-group-icon">
+            <input type="password" id="password" name="_password" required="required" autocomplete="current-password" class="form-control input-lg" />
+            <span class="input-group-addon">
+                <span class="icon icon-lg">
+                    <i class="fa fa-lock"></i>
+                </span>
+            </span>
+        </div>
+        <div class="clearfix">
+            <a href="pages-recover-password.html" class="pull-right">Lost Password?</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="checkbox-custom checkbox-default">
+                <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+                <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+            </div>
+        </div>
+        <div class="col-sm-4 text-right">
+            <button type="submit" id="_submit" name="_submit" class="btn btn-primary hidden-xs">{{ 'security.login.submit'|trans }}</button>
+            <button type="submit" id="_submit" name="_submit" class="btn btn-primary btn-block btn-lg visible-xs mt-lg">{{ 'security.login.submit'|trans }}</button>
+        </div>
+    </div>
+
+    <!--<span class="mt-lg mb-lg line-thru text-center text-uppercase">
+        <span>or</span>
+    </span>
+
+    <div class="mb-xs text-center">
+        <a class="btn btn-facebook mb-md ml-xs mr-xs">Connect with <i class="fa fa-facebook"></i></a>
+        <a class="btn btn-twitter mb-md ml-xs mr-xs">Connect with <i class="fa fa-twitter"></i></a>
+    </div>
+
+    <p class="text-center">Don't have an account yet? <a href="pages-signup.html">Sign Up!</a>-->
+
+</form>

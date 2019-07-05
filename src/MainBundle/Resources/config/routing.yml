@@ -1,0 +1,11 @@
+navigation:
+    resource: "@MainBundle/Resources/config/routing/navigation.yml"
+    prefix:   /
+
+admin_facility:
+    resource: "@MainBundle/Resources/config/routing/adminFacility.yml"
+    prefix:   /admin/facility
+
+admin_worker:
+    resource: "@MainBundle/Resources/config/routing/adminWorker.yml"
+    prefix:   /admin/worker

@@ -1,0 +1,312 @@
+﻿<html>
+	<head>
+		<title>Salary Print</title>
+		<!-- Web Fonts  -->
+		<link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet" type="text/css">
+
+		<!-- Vendor CSS -->
+		<link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap/css/bootstrap.css') }}" />
+
+		<!-- Invoice Print Style -->
+		<link rel="stylesheet" href="{{ asset('assets/stylesheets/invoice-print.css') }}" />
+	</head>
+	<body>
+		<div class="invoice">
+			                    <header class="clearfix">
+									<div class="row">
+										<div class="col-sm-6 mt-md">
+											<h2 class="h2 mt-none mb-sm text-dark text-bold">Salaire</h2>
+											<h4 class="h4 m-none text-dark text-bold">#{{ salary.id }}</h4>
+										</div>
+										<div class="col-sm-6 text-right mt-md mb-md">
+											<address class="ib mr-xlg">
+												Mixmax FastFood
+												<br/>
+												1 C100e, rondpoint Nafoura, Monastir 5000
+												<br/>
+												Phone: +216 73 504 050
+												<br/>
+												<!--email-->
+											</address>
+											<div class="ib">
+												<img src="{{ asset('assets/images/logo.png') }}" alt="mixmax" />
+											</div>
+										</div>
+									</div>
+								</header>
+			                    <div class="bill-info">
+									<div class="row">
+										<div class="col-md-6">
+											<div class="bill-to">
+												<p class="h5 mb-xs text-dark text-semibold">To:</p>
+												<address class="text-semibold">
+													{{ worker.name }}
+													<br/>
+													<!--121 King Street, Melbourne, Australia-->
+													<br/>
+													Phone: {{ worker.phone }}
+													<br/>
+													<!--info@envato.com-->
+												</address>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="bill-data text-right">
+												<p class="mb-none">
+													<span class="text-dark">Salaire du Mois:</span>
+													<span class="value">{{ salary.month }}, {{ salary.year }}</span>
+												</p>
+												<p class="mb-none">
+													<span class="text-dark">Date de Payement:</span>
+													<span class="value">{{ "now"|date("m/d/Y") }}</span>
+												</p>
+											</div>
+										</div>
+									</div>
+								</div>
+		
+			                    <div class="table-responsive">
+				                    <table class="table invoice-items" border="1">
+										<thead>
+											<tr class="h4 text-dark">
+												<th id="cell-id"     class="text-center text-semibold">Dimanche</th>
+												<th id="cell-item"   class="text-center text-semibold">Lundi</th>
+												<th id="cell-desc"   class="text-center text-semibold">Mardi</th>
+												<th id="cell-price"  class="text-center text-semibold">Mercredi</th>
+												<th id="cell-qty"    class="text-center text-semibold">Jeudi</th>
+												<th id="cell-total"  class="text-center text-semibold">Vendredi</th>
+                                                <th id="cell-total"  class="text-center text-semibold">Samedi</th>
+											</tr>
+										</thead>
+										<tbody>
+                                            <tr>{% set fw = 1 %}{% set advance = 0 %}{% set workdays = 0 %}
+                                                {% for key, days in salary.days  %}
+                                                    {% set advance = advance + days[worker.id]['advance']%}{% set workdays = workdays + days[worker.id]['work'] %}
+                                                    {% if key|date('D') == 'Sun'  %}
+                                                        <td class="fc-day fc-sun fc-widget-content fc-past fc-first" style="color:red;">
+                                                            <div class="row">
+                                                                <div class="col-md-2">
+                                                                    {{ key|date('j') }}
+                                                                </div>
+                                                                <div class="col-md-8">
+                                                                    {% if days[worker.id]['advance']!=0 %}
+                                                                        <div class="float-right">
+                                                                            Avance: {{ days[worker.id]['advance'] }} DT
+                                                                        </div>
+                                                                    {% endif %}
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    {% elseif key|date('D') == 'Mon' %}
+                                                        {% if fw == 1 %}
+                                                            {% set fw = 0 %}<td class="fc-day fc-sun fc-widget-content fc-past fc-first"></td>
+                                                        {% endif %}
+                                                        <td class="text-semibold" {% if days[worker.id]['work']==0 %} style="color:red;" {% endif %}>
+                                                            <div class="row">
+                                                                <div class="col-md-2">
+                                                                    {{ key|date('j') }}
+                                                                </div>
+                                                                <div class="col-md-8">
+                                                                    {% if days[worker.id]['advance']!=0 %}
+                                                                        <div class="float-right">
+                                                                            Avance: {{ days[worker.id]['advance'] }} DT
+                                                                        </div>
+                                                                    {% endif %}
+                                                                    {% if days[worker.id]['work']==0 %}
+                                                                        <div class="float-right">
+                                                                            Repos
+                                                                        </div>
+                                                                    {% endif %}
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    {% elseif key|date('D') == 'Tue' %}
+                                                        {% if fw == 1 %}
+                                                            {% set fw = 0 %}
+                                                            <td class="fc-day fc-sun fc-widget-content fc-past fc-first"></td>
+                                                            <td class="text-semibold text-dark"></td>
+                                                        {% endif %}
+                                                        <td class="text-semibold" {% if days[worker.id]['work']==0 %} style="color:red;" {% endif %}>
+                                                            <div class="row">
+                                                                <div class="col-md-2">
+                                                                    {{ key|date('j') }}
+                                                                </div>
+                                                                <div class="col-md-8">
+                                                                    {% if days[worker.id]['advance']!=0 %}
+                                                                        <div class="float-right">
+                                                                            Avance: {{ days[worker.id]['advance'] }} DT
+                                                                        </div>
+                                                                    {% endif %}
+                                                                    {% if days[worker.id]['work']==0 %}
+                                                                        <div class="float-right">
+                                                                            Repos
+                                                                        </div>
+                                                                    {% endif %}
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    {% elseif key|date('D') == 'Wed' %}
+                                                        {% if fw == 1 %}
+                                                            {% set fw = 0 %}
+                                                            <td class="fc-day fc-sun fc-widget-content fc-past fc-first"></td>
+                                                            <td class="text-semibold text-dark"></td>
+                                                            <td class="text-semibold text-dark"></td>
+                                                        {% endif %}
+                                                        <td class="text-semibold" {% if days[worker.id]['work']==0 %} style="color:red;" {% endif %}>
+                                                            <div class="row">
+                                                                <div class="col-md-2">
+                                                                    {{ key|date('j') }}
+                                                                </div>
+                                                                <div class="col-md-8">
+                                                                    {% if days[worker.id]['advance']!=0 %}
+                                                                        <div class="float-right">
+                                                                            Avance: {{ days[worker.id]['advance'] }} DT
+                                                                        </div>
+                                                                    {% endif %}
+                                                                    {% if days[worker.id]['work']==0 %}
+                                                                        <div class="float-right">
+                                                                            Repos
+                                                                        </div>
+                                                                    {% endif %}
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    {% elseif key|date('D') == 'Thu' %}
+                                                        {% if fw == 1 %}
+                                                            {% set fw = 0 %}
+                                                            <td class="fc-day fc-sun fc-widget-content fc-past fc-first"></td>
+                                                            <td class="text-semibold text-dark"></td>
+                                                            <td class="text-semibold text-dark"></td>
+                                                            <td class="text-semibold text-dark"></td>
+                                                        {% endif %}
+                                                        <td class="text-semibold" {% if days[worker.id]['work']==0 %} style="color:red;" {% endif %}>
+                                                            <div class="row">
+                                                                <div class="col-md-2">
+                                                                    {{ key|date('j') }}
+                                                                </div>
+                                                                <div class="col-md-8">
+                                                                    {% if days[worker.id]['advance']!=0 %}
+                                                                        <div class="float-right">
+                                                                            Avance: {{ days[worker.id]['advance'] }} DT
+                                                                        </div>
+                                                                    {% endif %}
+                                                                    {% if days[worker.id]['work']==0 %}
+                                                                        <div class="float-right">
+                                                                            Repos
+                                                                        </div>
+                                                                    {% endif %}
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    {% elseif key|date('D') == 'Fri' %}
+                                                        {% if fw == 1 %}
+                                                            {% set fw = 0 %}
+                                                            <td class="fc-day fc-sun fc-widget-content fc-past fc-first"></td>
+                                                            <td class="text-semibold text-dark"></td>
+                                                            <td class="text-semibold text-dark"></td>
+                                                            <td class="text-semibold text-dark"></td>
+                                                            <td class="text-semibold text-dark"></td>
+                                                        {% endif %}
+                                                        <td class="text-semibold" {% if days[worker.id]['work']==0 %} style="color:red;" {% endif %}>
+                                                            <div class="row">
+                                                                <div class="col-md-2">
+                                                                    {{ key|date('j') }}
+                                                                </div>
+                                                                <div class="col-md-8">
+                                                                    {% if days[worker.id]['advance']!=0 %}
+                                                                        <div class="float-right">
+                                                                            Avance: {{ days[worker.id]['advance'] }} DT
+                                                                        </div>
+                                                                    {% endif %}
+                                                                    {% if days[worker.id]['work']==0 %}
+                                                                        <div class="float-right">
+                                                                            Repos
+                                                                        </div>
+                                                                    {% endif %}
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    {% else %}
+                                                        {% if fw == 1 %}
+                                                            {% set fw = 0 %}
+                                                            <td class="fc-day fc-sun fc-widget-content fc-past fc-first"></td>
+                                                            <td class="text-semibold text-dark"></td>
+                                                            <td class="text-semibold text-dark"></td>
+                                                            <td class="text-semibold text-dark"></td>
+                                                            <td class="text-semibold text-dark"></td>
+                                                            <td class="text-semibold text-dark"></td>
+                                                        {% endif %}
+                                                        <td class="text-semibold" {% if days[worker.id]['work']==0 %} style="color:red;" {% endif %}>
+                                                            <div class="row">
+                                                                <div class="col-md-2">
+                                                                    {{ key|date('j') }}
+                                                                </div>
+                                                                <div class="col-md-8">
+                                                                    {% if days[worker.id]['advance']!=0 %}
+                                                                        <div class="float-right">
+                                                                            Avance: {{ days[worker.id]['advance'] }} DT
+                                                                        </div>
+                                                                    {% endif %}
+                                                                    {% if days[worker.id]['work']==0 %}
+                                                                        <div class="float-right">
+                                                                            Repos
+                                                                        </div>
+                                                                    {% endif %}
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                    {% endif %}
+                                                {% endfor %}
+
+                                            </tr>
+                                        </tbody>
+									</table>
+								</div>
+							
+								<div class="invoice-summary">
+									<div class="row">
+                                        <div class="col-sm-4 col-sm-offset-4">
+                                            {% if salary.paid[worker.id] is defined and salary.paid[worker.id]==1 %}
+                                                <div class="ib float-left">
+									                <img src="{{ asset('assets/images/paid.png') }}" alt="mixmax" height="200" />
+								                </div>
+                                            {% endif %}
+                                        </div>
+										<div class="col-sm-4">
+											<table class="table h5 text-dark">
+												<tbody>
+                                                    <tr class="b-top-none">
+                                                        <td colspan="2">Jours de repos
+                                                        </td>
+                                                        <td class="text-left">{{ restdays }}
+                                                            Jours</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="2">Avance</td>
+                                                        <td class="text-left">{{ advance }}
+                                                            DT</td>
+                                                    </tr>
+                                                    <tr class="h4">
+                                                        <td colspan="2">Salaire</td>
+                                                        <td class="text-left">{{ worker.salary|round }}
+                                                            DT</td>
+                                                    </tr>
+                                                    <tr class="h4">
+                                                        <td colspan="2">Grand Total</td>
+                                                        <td class="text-left">{{ ((worker.salary / 26) * (26 - restdays) - advance)|round }}
+                                                            DT</td>
+                                                    </tr>
+                                                </tbody>
+											</table>
+					                    </div>
+				                    </div>
+			                    </div>
+		                    </div>
+
+		<script>
+			window.print();
+		</script>
+	</body>
+</html>

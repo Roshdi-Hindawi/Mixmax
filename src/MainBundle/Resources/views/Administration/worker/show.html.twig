@@ -1,0 +1,517 @@
+{% extends '@FOSUser/layout.html.twig' %}
+
+{% block worker %}nav-expanded nav-active{% endblock %}
+
+{% block body %}
+
+<!-- start: page -->
+
+<div class="row">
+	<div class="col-md-4 col-lg-3">
+
+		<section class="panel">
+			<div class="panel-body">
+				<div class="thumb-info mb-md">
+                    {% if worker.image %}
+					    <img src="{{ asset(worker.image.imgPath) }}" class="rounded img-responsive" alt="mixmax">
+                    {% elseif worker.gender == 'male' %}
+                        <img src="{{ asset('assets/images/male.png') }}" class="rounded img-responsive" alt="mixmax">
+                    {% else %}
+                        <img src="{{ asset('assets/images/male.png') }}" class="rounded img-responsive" alt="mixmax">
+                    {% endif %}
+					<div class="thumb-info-title">
+						<span class="thumb-info-inner">{{ worker.name }}</span>
+						<span class="thumb-info-type">{{ worker.post }}</span>
+					</div>
+				</div>
+
+				<div class="widget-toggle-expand mb-md">
+					<div class="widget-header">
+						<h6>Mois : {{ "now"|date("M d Y") }}</h6>
+						<div class="widget-toggle">+</div>
+					</div>
+					<div class="widget-content-collapsed">
+						<div class="progress progress-xs light">
+							<div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 10%;">
+								
+							</div>
+						</div>
+					</div>
+					<!--<div class="widget-content-expanded">
+						<ul class="simple-todo-list">
+							<li class="completed">Update Profile Picture</li>
+							<li class="completed">Change Personal Information</li>
+							<li>Update Social Media</li>
+							<li>Follow Someone</li>
+						</ul>
+					</div>-->
+				</div>
+
+				<hr class="dotted short">
+                <p>{{ worker.facility.name }}</p>
+				
+				<p>Situation: {{ worker.status }}</p>
+                {% if worker.startDate %}<p>Date Debut: {{ worker.startDate|date('d-M-Y') }}</p>{% endif %}
+                {% if worker.birthdate %}<p>Date Naissance: {{ worker.birthdate|date('d-M-Y') }}</p>{% endif %}
+				<div class="clearfix">
+					<a class="text-uppercase text-muted pull-right" href="#">(View All)</a>
+				</div>
+
+				<hr class="dotted short">
+
+				<div class="social-icons-list">
+
+					
+					{{ form_start(delete_form) }}
+                    <a rel="tooltip" data-placement="bottom" href="{{ path('admin_worker_index') }}" data-original-title="List"><i class="fa fa-book"></i><span>List</span></a>
+					<a rel="tooltip" data-placement="bottom" href="{{ path('admin_worker_edit', { 'id': worker.id }) }}" data-original-title="Modifier"><i class="fa fa-cogs"></i><span>Modifier</span></a>
+                    <a rel="tooltip" data-placement="bottom" href="#" data-original-title="Supprimer" onclick="form.submit();return false;"><i class="fa fa-trash-o"></i><span>Supprimer</span></a>
+					{{ form_end(delete_form) }}
+				</div>
+
+			</div>
+		</section>
+
+
+		<section class="panel">
+			<header class="panel-heading">
+				<div class="panel-actions">
+					<a href="#" class="fa fa-caret-down"></a>
+					<a href="#" class="fa fa-times"></a>
+				</div>
+
+				<h2 class="panel-title">
+					<span class="label label-primary label-sm text-normal va-middle mr-sm">198</span>
+					<span class="va-middle">Friends</span>
+				</h2>
+			</header>
+			<div class="panel-body">
+				<div class="content">
+					<ul class="simple-user-list">
+						<li>
+							<figure class="image rounded">
+								<img src="assets/images/!sample-user.jpg" alt="Joseph Doe Junior" class="img-circle">
+							</figure>
+							<span class="title">Joseph Doe Junior</span>
+							<span class="message truncate">Lorem ipsum dolor sit.</span>
+						</li>
+						<li>
+							<figure class="image rounded">
+								<img src="assets/images/!sample-user.jpg" alt="Joseph Junior" class="img-circle">
+							</figure>
+							<span class="title">Joseph Junior</span>
+							<span class="message truncate">Lorem ipsum dolor sit.</span>
+						</li>
+						<li>
+							<figure class="image rounded">
+								<img src="assets/images/!sample-user.jpg" alt="Joe Junior" class="img-circle">
+							</figure>
+							<span class="title">Joe Junior</span>
+							<span class="message truncate">Lorem ipsum dolor sit.</span>
+						</li>
+						<li>
+							<figure class="image rounded">
+								<img src="assets/images/!sample-user.jpg" alt="Joseph Doe Junior" class="img-circle">
+							</figure>
+							<span class="title">Joseph Doe Junior</span>
+							<span class="message truncate">Lorem ipsum dolor sit.</span>
+						</li>
+					</ul>
+					<hr class="dotted short">
+					<div class="text-right">
+						<a class="text-uppercase text-muted" href="#">(View All)</a>
+					</div>
+				</div>
+			</div>
+			<div class="panel-footer">
+				<div class="input-group input-search">
+					<input type="text" class="form-control" name="q" id="q" placeholder="Search...">
+					<span class="input-group-btn">
+						<button class="btn btn-default" type="submit">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</div>
+		</section>
+
+		<section class="panel">
+			<header class="panel-heading">
+				<div class="panel-actions">
+					<a href="#" class="fa fa-caret-down"></a>
+					<a href="#" class="fa fa-times"></a>
+				</div>
+
+				<h2 class="panel-title">Popular Posts</h2>
+			</header>
+			<div class="panel-body">
+				<ul class="simple-post-list">
+					<li>
+						<div class="post-image">
+							<div class="img-thumbnail">
+								<a href="#">
+									<img src="assets/images/post-thumb-1.jpg" alt="">
+								</a>
+							</div>
+						</div>
+						<div class="post-info">
+							<a href="#">Nullam Vitae Nibh Un Odiosters</a>
+							<div class="post-meta">
+								Jan 10, 2013
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="post-image">
+							<div class="img-thumbnail">
+								<a href="#">
+									<img src="assets/images/post-thumb-2.jpg" alt="">
+								</a>
+							</div>
+						</div>
+						<div class="post-info">
+							<a href="#">Vitae Nibh Un Odiosters</a>
+							<div class="post-meta">
+								Jan 10, 2013
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="post-image">
+							<div class="img-thumbnail">
+								<a href="#">
+									<img src="assets/images/post-thumb-3.jpg" alt="">
+								</a>
+							</div>
+						</div>
+						<div class="post-info">
+							<a href="#">Odiosters Nullam Vitae</a>
+							<div class="post-meta">
+								Jan 10, 2013
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</section>
+
+	</div>
+	<div class="col-md-8 col-lg-6">
+
+		<div class="tabs">
+			<ul class="nav nav-tabs tabs-primary">
+				<li class="active">
+					<a href="#overview" data-toggle="tab">Overview</a>
+				</li>
+				<li>
+					<a href="#edit" data-toggle="tab">Edit</a>
+				</li>
+			</ul>
+			<div class="tab-content">
+				<div id="overview" class="tab-pane active">
+					<h4 class="mb-md"><!--Update Status--></h4>
+                        
+							<section class="panel">
+								<header class="panel-heading">
+									<div class="panel-actions">
+										<a href="#" class="fa fa-caret-down"></a>
+										<a href="#" class="fa fa-times"></a>
+									</div>
+
+									<h2 class="panel-title">Donner Avance</h2>
+
+									<p class="panel-subtitle"></p>
+								</header>
+								<div class="panel-body">
+									<div class="row">
+                                        <form action="{{ path('admin_worker_manage', { 'id' : worker.id }) }}" class="form-horizontal form-bordered" method="post">
+                                            <div class="col-sm-5">
+											    <div class="form-group">
+												    <label class="control-label">Date</label>
+												    <div class="input-group">
+													    <span class="input-group-addon">
+														    <i class="fa fa-calendar"></i>
+													    </span>
+													    <input type="text" name="date" required data-plugin-datepicker class="form-control">
+												    </div>
+											    </div>
+										    </div>
+										    
+                                            <div class="col-sm-6" style="float:right;">
+											    <div class="form-group">
+												    <label class="control-label">Montant</label>
+                                                    <div class="input-group mb-md">
+													    <input type="text" name="advance" required class="form-control" placeholder="Montant en">
+													    <span class="input-group-addon">
+														    <span class="icon"><i >DT</i></span>
+													    </span>
+                                                        <span class="input-group-btn">
+														    <button class="btn btn-success" type="submit">Go!</button>
+													    </span>
+												    </div>
+											    </div>
+										    </div>
+                                        </form>
+									</div>
+								</div>
+							</section>
+                        
+							<section class="panel">
+								<header class="panel-heading">
+									<div class="panel-actions">
+										<a href="#" class="fa fa-caret-down"></a>
+										<a href="#" class="fa fa-times"></a>
+									</div>
+
+									<h2 class="panel-title">Donner Congé</h2>
+
+									<p class="panel-subtitle"></p>
+								</header>
+								<div class="panel-body">
+									<div class="row">
+                                        <form action="{{ path('admin_worker_restDays', { 'id' : worker.id }) }}" class="form-horizontal form-bordered" method="post">
+                                            
+										    <div class="col-sm-12">
+											    <div class="form-group">
+												    <label class="control-label">Date</label>
+                                                    <div class="input-group mb-md">
+													    <span class="input-group-addon">
+															<i class="fa fa-calendar"></i>
+														</span>
+														<input type="text" name="dates" required data-plugin-datepicker data-plugin-options='{ "multidate": true }' class="form-control">
+                                                        <span class="input-group-btn">
+														    <button class="btn btn-success" type="submit">Go!</button>
+													    </span>
+												    </div>
+											    </div>
+										    </div>
+                                        </form>
+									</div>
+								</div>
+							</section>
+                        
+					<h4 class="mb-xlg">Timeline</h4>
+
+					<div class="timeline timeline-simple mt-xlg mb-md">
+						<div class="tm-body">
+							<div class="tm-title">
+								<h3 class="h5 text-uppercase">November 2013</h3>
+							</div>
+							<ol class="tm-items">
+								<li>
+									<div class="tm-box">
+										<p class="text-muted mb-none">7 months ago.</p>
+										<p>
+											It's awesome when we find a good solution for our projects, Porto Admin is <span class="text-primary">#awesome</span>
+										</p>
+									</div>
+								</li>
+								<li>
+									<div class="tm-box">
+										<p class="text-muted mb-none">7 months ago.</p>
+										<p>
+											What is your biggest developer pain point?
+										</p>
+									</div>
+								</li>
+								<li>
+									<div class="tm-box">
+										<p class="text-muted mb-none">7 months ago.</p>
+										<p>
+											Checkout! How cool is that!
+										</p>
+										<div class="thumbnail-gallery">
+											<a class="img-thumbnail lightbox" href="assets/images/projects/project-4.jpg" data-plugin-options='{ "type":"image" }'>
+												<img class="img-responsive" width="215" src="assets/images/projects/project-4.jpg">
+												<span class="zoom">
+													<i class="fa fa-search"></i>
+												</span>
+											</a>
+										</div>
+									</div>
+								</li>
+							</ol>
+						</div>
+					</div>
+				</div>
+				<div id="edit" class="tab-pane">
+
+					{{ form_start(edit_form, { attr : { 'class' : 'form-horizontal' }}) }}
+						<h4 class="mb-xlg">Personal Information</h4>
+						<fieldset>
+							<div class="form-group">
+								<label class="col-md-3 control-label" for="profileFirstName">Nom &Aacute; Prenom</label>
+								<div class="col-md-8">
+                                    {{ form_widget(edit_form.name, { attr : { 'class' : 'form-control', 'id' : 'profileFirstName' }}) }}
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-3 control-label" for="profileLastName">Telephone</label>
+								<div class="col-md-8">
+									{{ form_widget(edit_form.phone, { attr : { 'class' : 'form-control', 'id' : 'profileFirstName' }}) }}
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-3 control-label" for="profileAddress">Genre</label>
+								<div class="col-md-8">
+									{{ form_widget(edit_form.gender, { attr : { 'class' : 'form-control', 'id' : 'profileFirstName' }}) }}
+								</div>
+							</div>
+						</fieldset>
+						<hr class="dotted tall">
+						<h4 class="mb-xlg">Travail</h4>
+						<fieldset>
+                            <div class="form-group">
+								<label class="col-md-3 control-label" for="profileBio">Restaurant</label>
+								<div class="col-md-8">
+									{{ form_widget(edit_form.facility, { attr : { 'class' : 'form-control', 'id' : 'profileFirstName' }}) }}
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-3 control-label" for="profileBio">Situation</label>
+								<div class="col-md-8">
+									{{ form_widget(edit_form.status, { attr : { 'class' : 'form-control', 'id' : 'profileFirstName' }}) }}
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-3 control-label" for="profileBio">Poste</label>
+								<div class="col-md-8">
+									{{ form_widget(edit_form.post, { attr : { 'class' : 'form-control', 'id' : 'profileFirstName' }}) }}
+								</div>
+							</div>
+                            <div class="form-group">
+								<label class="col-md-3 control-label" for="profileBio">Salaire</label>
+								<div class="col-md-8">
+									{{ form_widget(edit_form.salary, { attr : { 'class' : 'form-control', 'id' : 'profileFirstName' }}) }}
+								</div>
+							</div>
+                            <div class="form-group">
+								<label class="col-md-3 control-label" for="profileBio">Date Debut</label>
+								<div class="col-md-8">
+									{{ form_widget(edit_form.startDate, { attr : { 'id' : 'profileFirstName' }}) }}
+								</div>
+							</div>
+						</fieldset>
+						<hr class="dotted tall">
+						<h4 class="mb-xlg">Image</h4>
+						<fieldset class="mb-xl">
+							<div class="form-group">
+								<label class="col-md-3 control-label">Image</label>
+								<div class="col-md-6">
+									<div class="fileupload fileupload-new" data-provides="fileupload">
+										<div class="input-append">
+											<div class="uneditable-input">
+												<i class="fa fa-file fileupload-exists"></i>
+												<span class="fileupload-preview"></span>
+											</div>
+											<span class="btn btn-default btn-file">
+												<span class="fileupload-exists">Change</span>
+												<span class="fileupload-new">Select file</span>
+												{{ form_widget(edit_form.image.file) }}
+											</span>
+											<a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</fieldset>
+						<div class="panel-footer">
+							<div class="row">
+								<div class="col-md-9 col-md-offset-3">
+									<button type="submit" class="btn btn-primary">Modifier</button>
+									<button type="reset" class="btn btn-default">Reset</button>
+								</div>
+							</div>
+						</div>
+
+					{{ form_end(edit_form) }}
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-12 col-lg-3">
+
+		<h4 class="mb-md">Sale Stats</h4>
+		<ul class="simple-card-list mb-xlg">
+			<li class="primary">
+				<h3>{{ worker.salary }} <i>DT</i></h3>
+				<p>Salaire</p>
+			</li>
+			<li class="primary">
+				<h3>$ 189,000.00</h3>
+				<p>Nullam quris ris.</p>
+			</li>
+			<li class="primary">
+				<h3>16</h3>
+				<p>Nullam quris ris.</p>
+			</li>
+		</ul>
+
+		<h4 class="mb-md">Payement</h4>
+		<ul class="simple-bullet-list mb-xlg">
+			<li class="red">
+				<span class="title">
+					<a href="{{ path('admin_worker_pay', { 'id': worker.id }) }}"><i class="fa fa-usd mr-xs"></i> Salaire
+						{% if salary.paid[worker.id] is defined and salary.paid[worker.id]==1 %}
+							<div class="ib float-left">
+								<img src="{{ asset('assets/images/paid.png') }}" alt="mixmax" height="30"/>
+							</div>
+						{% endif %}
+					</a>
+				</span>
+				<span class="description truncate">
+					
+				</span>
+			</li>
+			{# <li class="green">
+				<span class="title">Tucson HTML5 Template</span>
+				<span class="description truncate">Lorem ipsom dolor sit amet</span>
+			</li>
+			<li class="blue">
+				<span class="title">Porto HTML5 Template</span>
+				<span class="description truncate">Lorem ipsom dolor sit.</span>
+			</li>
+			<li class="orange">
+				<span class="title">Tucson Template</span>
+				<span class="description truncate">Lorem ipsom dolor sit.</span>
+			</li> #}
+		</ul>
+
+		<h4 class="mb-md">Messages</h4>
+		<ul class="simple-user-list mb-xlg">
+			<li>
+				<figure class="image rounded">
+					<img src="assets/images/!sample-user.jpg" alt="Joseph Doe Junior" class="img-circle">
+				</figure>
+				<span class="title">Joseph Doe Junior</span>
+				<span class="message">Lorem ipsum dolor sit.</span>
+			</li>
+			<li>
+				<figure class="image rounded">
+					<img src="assets/images/!sample-user.jpg" alt="Joseph Junior" class="img-circle">
+				</figure>
+				<span class="title">Joseph Junior</span>
+				<span class="message">Lorem ipsum dolor sit.</span>
+			</li>
+			<li>
+				<figure class="image rounded">
+					<img src="assets/images/!sample-user.jpg" alt="Joe Junior" class="img-circle">
+				</figure>
+				<span class="title">Joe Junior</span>
+				<span class="message">Lorem ipsum dolor sit.</span>
+			</li>
+			<li>
+				<figure class="image rounded">
+					<img src="assets/images/!sample-user.jpg" alt="Joseph Doe Junior" class="img-circle">
+				</figure>
+				<span class="title">Joseph Doe Junior</span>
+				<span class="message">Lorem ipsum dolor sit.</span>
+			</li>
+		</ul>
+	</div>
+
+</div>
+<!-- end: page -->
+
+{% endblock %}

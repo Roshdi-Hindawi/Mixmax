@@ -1,0 +1,38 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div class="row">
+	<div class="col-md-6">
+        {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'form-horizontal', 'id': 'form1' } }) }}
+		
+			<section class="panel">
+				<header class="panel-heading">
+					<h2 class="panel-title">Modifier vos Information</h2>
+				</header>
+				<div class="panel-body">
+					<div class="form-group">
+						<label class="col-sm-4 control-label">Votre Nom: </label>
+						<div class="col-sm-8">
+                            {{ form_widget(form.username, {'attr' : {'class' : 'form-control'}} ) }}
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-4 control-label">Votre Email: </label>
+						<div class="col-sm-8">
+                            {{ form_widget(form.email, {'attr' : {'class' : 'form-control'}} ) }}
+						</div>
+					</div>
+                    <div class="form-group">
+						<label class="col-sm-4 control-label">Mot de passe Actuelle: </label>
+						<div class="col-sm-8">
+                            {{ form_widget(form.current_password, {'attr' : {'class' : 'form-control'}} ) }}
+						</div>
+					</div>
+				</div>
+				<footer class="panel-footer">
+					<button class="btn btn-primary">{{ 'profile.edit.submit'|trans }} </button>
+					<button type="reset" class="btn btn-default">Reset</button>
+				</footer>
+			</section>
+		{{ form_end(form) }}
+	</div>
+</div>
