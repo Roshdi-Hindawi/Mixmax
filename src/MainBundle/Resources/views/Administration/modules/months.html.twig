@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% if months is empty %}
     <p>No history</p>
 {% else %}
@@ -33,3 +34,36 @@
         </a>
     {% endfor %}
 {% endif %}
+=======
+{% for month in months %}
+    <a href="javascript:void(0)">
+        {% set days = month.days|keys %}
+
+        {% if days[0]|date('M') == "Jan" %}
+            Janvier {{ date('Y') }}
+        {% elseif days[0]|date('M') == "Feb" %}
+            Fevrier {{ days[0]|date('Y') }}
+        {% elseif days[0]|date('M') == "Mar" %}
+            Mars {{ days[0]|date('Y') }}
+        {% elseif days[0]|date('M') == "Apr" %}
+            Avril {{ days[0]|date('Y') }}
+        {% elseif days[0]|date('M') == "May" %}
+            Mai {{ days[0]|date('Y') }}
+        {% elseif days[0]|date('M') == "Jun" %}
+            Juin {{ days[0]|date('Y') }}
+        {% elseif days[0]|date('M') == "Jul" %}
+            Juillet {{ days[0]|date('Y') }}
+        {% elseif days[0]|date('M') == "Aout" %}
+            Aout {{ days[0]|date('Y') }}
+        {% elseif days[0]|date('M') == "Sep" %}
+            Septembre {{ days[0]|date('Y') }}
+        {% elseif days[0]|date('M') == "Oct" %}
+            Octobre {{ days[0]|date('Y') }}
+        {% elseif days[0]|date('M') == "Nov" %}
+            Novembre {{ days[0]|date('Y') }}
+        {% elseif days[0]|date('M') == "Dec" %}
+            Decembre {{ days[0]|date('Y') }}
+        {% endif %}
+    </a>
+{% endfor %}
+>>>>>>> 663dd3837221e865dd9760ea676172fad5bb9da5

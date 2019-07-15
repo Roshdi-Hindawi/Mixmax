@@ -36,7 +36,11 @@ class WorkerType extends AbstractType
                                                     'En Poste'=> 'En Poste',
                                                     'Démissionner'=> 'Démissionner',
                                                     'Suspendu'=> 'Suspendu',
+<<<<<<< HEAD
                                                     'Viré'=> 'viré']] )
+=======
+                                                    'Fired'=> 'Fired']] )
+>>>>>>> 663dd3837221e865dd9760ea676172fad5bb9da5
             ->add('image', MediaType::class, ['required' => false]);
     }/**
      * {@inheritdoc}
