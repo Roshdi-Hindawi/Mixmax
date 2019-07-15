@@ -6,6 +6,7 @@ use MainBundle\Entity\Worker;
 use MainBundle\Entity\Facility;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * Worker controller.
@@ -82,7 +83,7 @@ class WorkerController extends Controller
             $days = $salary->getDays();
             $paid = $salary->getPaid();
             foreach ($days as $key => $day) {
-                if (date('m d Y', $key) < date('m d Y')) {
+                if (date('Y-m-d', $key) < $worker->getStartDate()->format('Y-m-d')) {
                     $days[$key][$worker->getId()] = ['work' => 0,
                                                      'advance' => 0];
                 } elseif( date('w', $key)==0 ) { 
