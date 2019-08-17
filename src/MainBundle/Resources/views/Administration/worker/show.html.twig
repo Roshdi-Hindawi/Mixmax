@@ -59,13 +59,11 @@
 
 				<hr class="dotted short">
 
-				<div class="social-icons-list">
-
-					
+				<div class="social-icons-list">					
 					{{ form_start(delete_form) }}
                     <a rel="tooltip" data-placement="bottom" href="{{ path('admin_worker_index') }}" data-original-title="List"><i class="fa fa-book"></i><span>List</span></a>
 					<a rel="tooltip" data-placement="bottom" href="{{ path('admin_worker_edit', { 'id': worker.id }) }}" data-original-title="Modifier"><i class="fa fa-cogs"></i><span>Modifier</span></a>
-                    <a rel="tooltip" data-placement="bottom" href="#" data-original-title="Supprimer" onclick="form.submit();return false;"><i class="fa fa-trash-o"></i><span>Supprimer</span></a>
+					<button Onclick="return confirm('Confirmez La suppression');" type="submit" name="actiondelete" value="1" ><i class="fa fa-trash-o"></i></button>
 					{{ form_end(delete_form) }}
 				</div>
 

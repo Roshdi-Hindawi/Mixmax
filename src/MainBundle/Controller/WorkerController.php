@@ -210,7 +210,7 @@ class WorkerController extends Controller
         {
             for ($day = 1; $day <= count($month); $day++)
             {
-                $date = mktime(0, 0, 0, intval(date('m')), $day, intval(date('Y')) );
+                $date = mktime(4, 0, 0, intval(date('m')), $day, intval(date('Y')) );
                 if ($request->request->get('date') == date('m/d/Y', $date)) {
                     $month[$date][$worker->getId()]['advance'] = $month[$date][$worker->getId()]['advance'] + $request->request->get('advance');
                     
@@ -236,7 +236,7 @@ class WorkerController extends Controller
         {
             for ($day = 1; $day <= count($month); $day++)
             {
-                $date = mktime(0, 0, 0, intval(date('m')), $day, intval(date('Y')) );
+                $date = mktime(4, 0, 0, intval(date('m')), $day, intval(date('Y')) );
                 
                 if(strpos($request->request->get('dates'), date('m/d/Y', $date)) !== false){
                     $month[$date][$worker->getId()]['work'] = 0;

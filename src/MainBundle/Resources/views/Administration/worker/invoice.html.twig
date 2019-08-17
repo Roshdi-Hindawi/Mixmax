@@ -266,14 +266,14 @@
 
                 <div class="invoice-summary">
                     <div class="row">
-                        <div class="col-sm-4 col-sm-offset-4 ">
+                        <div class="col-md-4 col-sm-4 col-sm-offset-4 ">
                             {% if salary.paid[worker.id] is defined and salary.paid[worker.id]==1 %}
                                 <div class="ib float-left">
-                                    <img src="{{ asset('assets/images/paid.png') }}" alt="mixmax" height="200"/>
+                                    <img src="{{ asset('assets/images/paid.png') }}" alt="mixmax" height="150"/>
                                 </div>
                             {% endif %}
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-md-4 col-sm-4">
                             <table class="table h5 text-dark">
                                 <tbody>
                                     <tr class="b-top-none">

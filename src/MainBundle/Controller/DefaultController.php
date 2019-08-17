@@ -25,7 +25,7 @@ class DefaultController extends Controller
             $year = date('Y');
 
             for($d=1; $d<=31; $d++) {
-                $time=mktime(0, 0, 0, intval($month), $d, intval($year));
+                $time=mktime(4, 0, 0, intval($month), $d, intval($year));
                 if (date('m', $time)==$month)
                     //$list[]=date('l, d-m-Y', $time);
                     foreach ($workers as $worker) {
