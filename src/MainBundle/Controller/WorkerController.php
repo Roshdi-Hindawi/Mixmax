@@ -202,19 +202,21 @@ class WorkerController extends Controller
 
     public function avanceAction(Request $request, Worker $worker)
     {
+
+        $time = strtotime($request->request->get('date'));
         $em = $this->getDoctrine()->getManager();
-        $salary = $em->getRepository('MainBundle:Salary')->findOneBy(['month' => intval(date('m')), 'year' => intval(date('Y'))]);
+        $salary = $em->getRepository('MainBundle:Salary')->findOneBy(['month' => intval(date('m', $time)), 'year' => intval(date('Y', $time))]);
         $month = $salary->getDays();
         
-        if ($request->getMethod() == 'POST' and $request->request->get('date') != null)
-        {
-            for ($day = 1; $day <= count($month); $day++)
-            {
-                $date = mktime(4, 0, 0, intval(date('m')), $day, intval(date('Y')) );
-                if ($request->request->get('date') == date('m/d/Y', $date)) {
-                    $month[$date][$worker->getId()]['advance'] = $month[$date][$worker->getId()]['advance'] + $request->request->get('advance');
-                    
+        if ($request->getMethod() == 'POST' and $request->request->get('date') != null) {
+
+            foreach ($month as $t => $day ) {
+
+                //$date = mktime(4, 0, 0, intval(date('m', $time)), $day, intval(date('Y', $time)) );
+                if ($request->request->get('date') == date('m/d/Y', $t)) {
+                    $month[$t][$worker->getId()]['advance'] = $month[$t][$worker->getId()]['advance'] + intval($request->request->get('advance'));
                 }
+                
             }
 
             $salary->setDays($month);
@@ -225,21 +227,20 @@ class WorkerController extends Controller
         return $this->redirectToRoute('admin_worker_show', array('id' => $worker->getId()));
     }
 
-    public function restDaysAction(Request $request, Worker $worker)
-    {
+    public function restDaysAction(Request $request, Worker $worker) {
         
+        $time = strtotime($request->request->get('month'));
         $em = $this->getDoctrine()->getManager();
-        $salary = $em->getRepository('MainBundle:Salary')->findOneBy(['month' => intval(date('m')), 'year' => intval(date('Y'))]);
+        $salary = $em->getRepository('MainBundle:Salary')->findOneBy(['month' => intval(date('m', $time)), 'year' => intval(date('Y', $time))]);
         $month = $salary->getDays();
         
-        if ($request->getMethod() == 'POST' and $request->request->get('dates') != null)
-        {
-            for ($day = 1; $day <= count($month); $day++)
-            {
-                $date = mktime(4, 0, 0, intval(date('m')), $day, intval(date('Y')) );
-                
-                if(strpos($request->request->get('dates'), date('m/d/Y', $date)) !== false){
-                    $month[$date][$worker->getId()]['work'] = 0;
+        if ($request->getMethod() == 'POST' and $request->request->get('dates') != null) {
+
+            foreach ($month as $t => $day ) {
+
+                if(strpos($request->request->get('dates'), date('m/d/Y', $t)) !== false) {
+
+                    $month[$t][$worker->getId()]['work'] = 0;
                 }
             }
             
@@ -325,6 +326,36 @@ class WorkerController extends Controller
             'salary' => $paidsalary,
             'advance' => $advance,
         ));
+    }
+
+    public function monthDeatilsAction(Request $request, Worker $worker){
+
+        $em = $this->getDoctrine()->getManager();
+        $salary = $em->getRepository('MainBundle:Salary')->findOneBy(['month' => intval(date('m')), 'year' => intval(date('Y'))]);
+
+        $restdays=0;
+
+        foreach($salary->getDays() as $key => $day) {
+            if(array_key_exists($worker->getId(), $day)){
+                if(date('w', $key)!= 0 and $day[$worker->getId()]['work']==0) {
+                    $restdays = $restdays + 1;
+                }
+            } else{
+                $this->addFlash('warning', $worker->getName().'n\'a pas encore un salaire a payer');
+                return $this->redirectToRoute('admin_worker_show', array('id' => $worker->getId()));
+            }
+        }
+
+        if ($request->getMethod()=='POST') {
+            $paid = $salary->getPaid();
+
+            $paid[$worker->getId()] = 1;
+
+            $salary->setPaid($paid);
+            $em->flush();
+        }
+
+        return $this->render('@Main/Administration/worker/monthDetails.html.twig', ['salary' => $salary, 'worker' => $worker, 'restdays' => $restdays]);
     }
 
 }

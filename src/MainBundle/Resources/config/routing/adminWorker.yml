@@ -47,3 +47,8 @@ admin_facility_worker:
     path:     /facility/{id}/workers
     defaults: { _controller: "MainBundle:Worker:facilityWorker" }
     methods:  GET
+
+admin_worker_monthDeatils:
+    path:     /{id}/monthDeatils
+    defaults: { _controller: "MainBundle:Worker:monthDeatils" }
+    methods:  [GET, POST]
