@@ -17,7 +17,7 @@
                     {% elseif worker.gender == 'male' %}
                         <img src="{{ asset('assets/images/male.png') }}" class="rounded img-responsive" alt="mixmax">
                     {% else %}
-                        <img src="{{ asset('assets/images/male.png') }}" class="rounded img-responsive" alt="mixmax">
+                        <img src="{{ asset('assets/images/female.png') }}" class="rounded img-responsive" alt="mixmax">
                     {% endif %}
 					<div class="thumb-info-title">
 						<span class="thumb-info-inner">{{ worker.name }}</span>
@@ -32,7 +32,9 @@
 					</div>
 					<div class="widget-content-collapsed">
 						<div class="progress progress-xs light">
-							<div class="progress-bar" role="progressbar" aria-valuenow="31" aria-valuemin="1" aria-valuemax="31" style="width: {{ ("now"|date("d")*100)/31 }}%;">
+							<div class="progress-bar" role="progressbar" aria-valuenow="{{ "now"|date("d") }}"
+							 aria-valuemin="1" aria-valuemax="{{ "now"|date("t") }}" 
+							 style="width: {{ ("now"|date("d")*100)/("now"|date("t")) }}%;">
 								
 							</div>
 						</div>
@@ -434,16 +436,16 @@
 		<h4 class="mb-md">Sale Stats</h4>
 		<ul class="simple-card-list mb-xlg">
 			<li class="primary">
-				<h3>{{ worker.salary }} <i>DT</i></h3>
+				<h3>{{ worker.salary|round }} <i>DT</i></h3>
 				<p>Salaire</p>
 			</li>
 			<li class="primary">
-				<h3>$ 189,000.00</h3>
-				<p>Nullam quris ris.</p>
+				<h3>{{ app.session.get('workdays')[worker.id] }}</h3>
+				<p>jours travaillés</p>
 			</li>
 			<li class="primary">
-				<h3>16</h3>
-				<p>Nullam quris ris.</p>
+				<h3>{{ ((worker.salary / 26) * app.session.get('workdays')[worker.id] - app.session.get('advance')[worker.id])|round }} DT</h3>
+				<p>montant à payer</p>
 			</li>
 		</ul>
 
