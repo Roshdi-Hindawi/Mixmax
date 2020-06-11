@@ -36,7 +36,7 @@ class Media
 
     public function postLoad()
     {
-        $this->updateAt = new \DateTime();
+        $this->updateAt = new \DateTime('now');
     }
 
     /**
@@ -75,7 +75,7 @@ class Media
     {
         $this->tempFile = $this->getAbsolutePath();
         $this->oldFile = $this->getPath();
-        $this->updateAt = new \DateTime();
+        $this->updateAt = new \DateTime('now');
         
         if (null !== $this->file) 
             $this->path = sha1(uniqid(mt_rand(),true)).'.'.$this->file->guessExtension();

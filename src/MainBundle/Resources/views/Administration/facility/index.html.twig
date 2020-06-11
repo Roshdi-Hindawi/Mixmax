@@ -12,24 +12,24 @@
 	<div class="col-md-12 col-lg-6">
 		<div class="row">
 			<div class="col-md-12">
-				<h3 class="mt-lg">{{ facility.name }}</h3>
-				<p class="mb-lg"></p>
+				<h3 class="mt-lg"></h3>
+				<p class="mb-lg"</p>
 
 				<section class="panel">
 					<div class="panel-body panel-body-nopadding">
 						<div class="owl-carousel mb-md" data-plugin-carousel data-plugin-options='{ "items": 1, "autoHeight": true }'>
 							<div class="item">
-								<img alt="" class="img-responsive img-rounded" src="{{ asset(facility.image.imgPath) }}" height="500">
+								<img alt="{{ facility.name }}" class="img-responsive img-rounded facility-img" src="{{ asset(facility.image.imgPath) }}">
 							</div>
 							<div class="item">
-								<img alt="" class="img-responsive img-rounded" src="{{ asset(facility.image.imgPath) }}" height="500">
+								<img alt="{{ facility.name }}" class="img-responsive img-rounded facility-img" src="{{ asset(facility.image.imgPath) }}">
 							</div>
 							<div class="item">
-								<img alt="" class="img-responsive img-rounded" src="{{ asset(facility.image.imgPath) }}" height="500">
+								<img alt="{{ facility.name }}" class="img-responsive img-rounded facility-img" src="{{ asset(facility.image.imgPath) }}">
 							</div>
 						</div>
 						<div class="p-md">
-							<h4 class="text-semibold mt-none">Adresse</h4>
+							<h4 class="text-semibold mt-none">{{ facility.name }}</h4>
 							<p>{{ facility.address }}</p>
 						</div>
 					</div>
