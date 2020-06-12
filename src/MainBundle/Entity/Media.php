@@ -92,7 +92,7 @@ class Media
             $this->file->move($this->getUploadRootDir(), $this->path);
             unset($this->file);
 
-            if ($this->oldFile != null) unlink($this->tempFile);
+            if ($this->oldFile != null and file_exists($this->tempFile)) unlink($this->tempFile);
                 
             }        
     }
@@ -110,6 +110,7 @@ class Media
      */
     public function removeUpload()
     {
+        
         if (file_exists($this->tempFile)) unlink($this->tempFile);
     }
 

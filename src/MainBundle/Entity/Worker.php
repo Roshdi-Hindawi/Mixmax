@@ -28,7 +28,7 @@ class Worker
     private $facility;
 
     /**
-     * @ORM\OneToOne(targetEntity="MainBundle\Entity\Media", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="MainBundle\Entity\Media", cascade={"persist", "remove"}, fetch="EAGER")
      * @ORM\JoinColumn(nullable=true)
      */
     private $image;

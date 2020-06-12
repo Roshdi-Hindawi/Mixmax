@@ -22,7 +22,7 @@ class Facility
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="MainBundle\Entity\Media", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="MainBundle\Entity\Media", cascade={"persist", "remove"}, fetch="EAGER")
      * @ORM\JoinColumn(nullable=false)
      */
     private $image;
